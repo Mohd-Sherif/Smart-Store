@@ -8,20 +8,23 @@
 #include "MCAL/StandardMacrosHeader/std_macros.h"
 #include "MCAL/DioDriver/DIO.h"
 #include "MCAL/UsartDriver/USART.h"
+#include "MCAL/SpiDriver/SPI.h"
 #include "HAL/LcdDriver/LCD.h"
 #include "../../ProductsDB/Database.h"
 
-#define START_MESSAGE 0xcf
-#define END_MESSAGE 0x0f
-#define ITEMS_COUNT 10
-#define BAR_CODE_LENGTH 8
+#define START_MESSAGE '5'
+#define END_MESSAGE '3'
+#define ITEMS_COUNT 2
+#define BAR_CODE_LENGTH 1
+#define DUMMY_DATA 0xff
 
 int receiving();
 void calculatingCost(int items);
 void printCost();
 
-volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH], received = 0, found = 0;
+volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH];
 volatile unsigned int totalCost;
+volatile unsigned int testArray[ITEMS_COUNT] = {200, 201};
 
 int main(void)
 {
@@ -30,10 +33,12 @@ int main(void)
 	LCD_vsend_string(" Welcome To Our ");
 	LCD_vmove_cursor(2,1);
 	LCD_vsend_string("   Smart Store  ");
-	USART_vinit(9600);
+	//USART_vinit(9600);
+	SPI_Slave_init();
     while (1) 
     {
-		if(USART_u8receive_data() == START_MESSAGE){
+		//if(USART_u8receive_data() == START_MESSAGE){
+		if(SPI_Slave_Receive_char(DUMMY_DATA) == START_MESSAGE){
 			totalCost = 0;
 			LCD_vCLR_screen();
 			LCD_vsend_string("Reading Products");
@@ -61,11 +66,14 @@ int main(void)
 }
 
 int receiving(){
+	unsigned char received;
 	for(int i=0;i<ITEMS_COUNT;i++){
 		for(int j=0;j<BAR_CODE_LENGTH;j++){
-			received = USART_u8receive_data();
+			//received = USART_u8receive_data();
+			received = SPI_Slave_Receive_char(DUMMY_DATA);
+			//_delay_ms(300);
 			if(received == END_MESSAGE){
-				return i;
+				return i+1;
 			}
 			receivedProducts[i][j] = received;
 		}
@@ -74,10 +82,14 @@ int receiving(){
 }
 
 void calculatingCost(int items){
+	int found;
+	//int *ptr;
 	for(int i=0;i<items;i++){
 		found = 0;
+		//ptr = products[i].barcode;
 		for(int j=0;j<BAR_CODE_LENGTH;j++){
-			if(receivedProducts[i][j] != products[i].barcode[j]){
+			//if(receivedProducts[i][j] != ptr[j]){
+			if(receivedProducts[i][j] != products[i].barcode){
 				break;
 			}
 			found++;
@@ -91,18 +103,18 @@ void calculatingCost(int items){
 void printCost(){
 	LCD_vCLR_screen();
 	LCD_vsend_string("Total Cost=");
-	totalCost = totalCost % 1000;
+	//totalCost = totalCost % 1000;
 	if(totalCost<10){
-		LCD_vsend_char((char)(totalCost));
+		LCD_vsend_char((char)(totalCost)+48);
 	}
 	else if(totalCost<100){
-		LCD_vsend_char((char)(totalCost/10));
-		LCD_vsend_char((char)(totalCost%10));
+		LCD_vsend_char((char)((totalCost/10)%10)+48);
+		LCD_vsend_char((char)(totalCost%10)+48);
 	}
 	else{
-		LCD_vsend_char((char)(totalCost/100));
-		LCD_vsend_char((char)(totalCost/10));
-		LCD_vsend_char((char)(totalCost%10));
+		LCD_vsend_char((char)((totalCost/100)%10)+48);
+		LCD_vsend_char((char)((totalCost/10)%10)+48);
+		LCD_vsend_char((char)(totalCost%10)+48);
 	}
 	_delay_ms(1000);
 }
