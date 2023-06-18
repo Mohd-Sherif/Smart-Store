@@ -16,6 +16,7 @@
 #define ITEMS_COUNT 10
 #define BAR_CODE_LENGTH 8
 
+void receiving();
 
 volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH], received = 0, found = 0;
 volatile unsigned int totalCost;
@@ -53,5 +54,17 @@ int main(void)
 			LCD_vsend_string("   Smart Store  ");
 		}
     }
+}
+
+void receiving(){
+	for(int i=0;i<ITEMS_COUNT;i++){
+		for(int j=0;j<BAR_CODE_LENGTH;j++){
+			received = USART_u8receive_data();
+			if(received == END_MESSAGE){
+				return;
+			}
+			receivedProducts[i][j] = received;
+		}
+	}
 }
 
