@@ -9,6 +9,7 @@
 #include "MCAL/DioDriver/DIO.h"
 #include "MCAL/UsartDriver/USART.h"
 #include "HAL/LcdDriver/LCD.h"
+#include "../../ProductsDB/Database.h"
 
 
 int main(void)
