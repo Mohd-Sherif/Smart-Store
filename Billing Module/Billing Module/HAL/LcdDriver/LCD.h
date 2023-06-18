@@ -8,8 +8,8 @@
 #define F_CPU 8000000UL
 #include <util/delay.h>
 #define _4BIT_MODE
-#define DATA_PORT 'A'
-#define CMD_PORT 'A'
+#define DATA_PORT 'C'
+#define CMD_PORT 'C'
 #define RS 0
 #define RW 1
 #define EN 2
