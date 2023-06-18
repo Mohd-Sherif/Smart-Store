@@ -16,8 +16,8 @@
 #define ITEMS_COUNT 10
 #define BAR_CODE_LENGTH 8
 
-void receiving();
-void calculatingCost();
+int receiving();
+void calculatingCost(int items);
 void printCost();
 
 volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH], received = 0, found = 0;
@@ -25,11 +25,12 @@ volatile unsigned int totalCost;
 
 int main(void)
 {
-    USART_vinit(9600);
+	int items;
     LCD_vinit();
 	LCD_vsend_string(" Welcome To Our ");
 	LCD_vmove_cursor(2,1);
 	LCD_vsend_string("   Smart Store  ");
+	USART_vinit(9600);
     while (1) 
     {
 		if(USART_u8receive_data() == START_MESSAGE){
@@ -38,13 +39,13 @@ int main(void)
 			LCD_vsend_string("Reading Products");
 			LCD_vmove_cursor(2,1);
 			LCD_vsend_string("Please Wait...");
-			receiving();
+			items = receiving();
 			LCD_vCLR_screen();
 			LCD_vsend_string("Calculating cost");
 			LCD_vmove_cursor(2,1);
 			LCD_vsend_string("Please Wait...");
 			_delay_ms(500);
-			calculatingCost();
+			calculatingCost(items);
 			printCost();
 			LCD_vCLR_screen();
 			LCD_vsend_string("Thanks for");
@@ -59,20 +60,21 @@ int main(void)
     }
 }
 
-void receiving(){
+int receiving(){
 	for(int i=0;i<ITEMS_COUNT;i++){
 		for(int j=0;j<BAR_CODE_LENGTH;j++){
 			received = USART_u8receive_data();
 			if(received == END_MESSAGE){
-				return;
+				return i;
 			}
 			receivedProducts[i][j] = received;
 		}
 	}
+	return ITEMS_COUNT;
 }
 
-void calculatingCost(){
-	for(int i=0;i<ITEMS_COUNT;i++){
+void calculatingCost(int items){
+	for(int i=0;i<items;i++){
 		found = 0;
 		for(int j=0;j<BAR_CODE_LENGTH;j++){
 			if(receivedProducts[i][j] != products[i].barcode[j]){
