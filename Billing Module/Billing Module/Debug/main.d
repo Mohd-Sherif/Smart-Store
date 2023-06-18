@@ -15,6 +15,8 @@ main.d main.o: .././main.c .././MCAL/StandardMacrosHeader/std_macros.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  .././MCAL/UsartDriver/../StandardMacrosHeader/std_macros.h \
+ .././MCAL/SpiDriver/SPI.h .././MCAL/SpiDriver/../DioDriver/DIO.h \
+ .././MCAL/SpiDriver/../StandardMacrosHeader/std_macros.h \
  .././HAL/LcdDriver/LCD.h .././../../ProductsDB/Database.h
 
 .././MCAL/StandardMacrosHeader/std_macros.h:
@@ -52,6 +54,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 .././MCAL/UsartDriver/../StandardMacrosHeader/std_macros.h:
+
+.././MCAL/SpiDriver/SPI.h:
+
+.././MCAL/SpiDriver/../DioDriver/DIO.h:
+
+.././MCAL/SpiDriver/../StandardMacrosHeader/std_macros.h:
 
 .././HAL/LcdDriver/LCD.h:
 

@@ -37,6 +37,7 @@ SUBDIRS :=  \
 ../HAL/LcdDriver/ \
 ../MCAL/ \
 ../MCAL/DioDriver/ \
+../MCAL/SpiDriver/ \
 ../MCAL/StandardMacrosHeader/ \
 ../MCAL/UsartDriver/
 
@@ -46,6 +47,7 @@ C_SRCS +=  \
 ../HAL/LcdDriver/LCD.c \
 ../main.c \
 ../MCAL/DioDriver/DIO.c \
+../MCAL/SpiDriver/SPI.c \
 ../MCAL/UsartDriver/USART.c
 
 
@@ -59,24 +61,28 @@ OBJS +=  \
 HAL/LcdDriver/LCD.o \
 main.o \
 MCAL/DioDriver/DIO.o \
+MCAL/SpiDriver/SPI.o \
 MCAL/UsartDriver/USART.o
 
 OBJS_AS_ARGS +=  \
 HAL/LcdDriver/LCD.o \
 main.o \
 MCAL/DioDriver/DIO.o \
+MCAL/SpiDriver/SPI.o \
 MCAL/UsartDriver/USART.o
 
 C_DEPS +=  \
 HAL/LcdDriver/LCD.d \
 main.d \
 MCAL/DioDriver/DIO.d \
+MCAL/SpiDriver/SPI.d \
 MCAL/UsartDriver/USART.d
 
 C_DEPS_AS_ARGS +=  \
 HAL/LcdDriver/LCD.d \
 main.d \
 MCAL/DioDriver/DIO.d \
+MCAL/SpiDriver/SPI.d \
 MCAL/UsartDriver/USART.d
 
 OUTPUT_FILE_PATH +=Billing\ Module.elf
@@ -108,6 +114,13 @@ HAL/LcdDriver/LCD.o: ../HAL/LcdDriver/LCD.c
 	
 
 MCAL/DioDriver/DIO.o: ../MCAL/DioDriver/DIO.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/SpiDriver/SPI.o: ../MCAL/SpiDriver/SPI.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

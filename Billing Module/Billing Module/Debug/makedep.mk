@@ -8,5 +8,7 @@ main.c
 
 MCAL\DioDriver\DIO.c
 
+MCAL\SpiDriver\SPI.c
+
 MCAL\UsartDriver\USART.c
 
