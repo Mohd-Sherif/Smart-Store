@@ -17,6 +17,7 @@
 #define BAR_CODE_LENGTH 8
 
 void receiving();
+void calculatingCost();
 
 volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH], received = 0, found = 0;
 volatile unsigned int totalCost;
@@ -64,6 +65,21 @@ void receiving(){
 				return;
 			}
 			receivedProducts[i][j] = received;
+		}
+	}
+}
+
+void calculatingCost(){
+	for(int i=0;i<ITEMS_COUNT;i++){
+		found = 0;
+		for(int j=0;j<BAR_CODE_LENGTH;j++){
+			if(receivedProducts[i][j] != products[i].barcode[j]){
+				break;
+			}
+			found++;
+		}
+		if(found == BAR_CODE_LENGTH){
+			totalCost += products[i].price;
 		}
 	}
 }
