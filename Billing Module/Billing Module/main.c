@@ -11,6 +11,10 @@
 #include "HAL/LcdDriver/LCD.h"
 #include "../../ProductsDB/Database.h"
 
+#define START_MESSAGE 0xcf
+#define END_MESSAGE 0x0f
+#define ITEMS_COUNT 10
+#define BAR_CODE_LENGTH 8
 
 int main(void)
 {
