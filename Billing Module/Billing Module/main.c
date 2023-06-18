@@ -18,9 +18,11 @@
 
 void receiving();
 void calculatingCost();
+void printCost();
 
 volatile unsigned char receivedProducts[ITEMS_COUNT][BAR_CODE_LENGTH], received = 0, found = 0;
 volatile unsigned int totalCost;
+
 int main(void)
 {
     USART_vinit(9600);
@@ -84,3 +86,21 @@ void calculatingCost(){
 	}
 }
 
+void printCost(){
+	LCD_vCLR_screen();
+	LCD_vsend_string("Total Cost=");
+	totalCost = totalCost % 1000;
+	if(totalCost<10){
+		LCD_vsend_char((char)(totalCost));
+	}
+	else if(totalCost<100){
+		LCD_vsend_char((char)(totalCost/10));
+		LCD_vsend_char((char)(totalCost%10));
+	}
+	else{
+		LCD_vsend_char((char)(totalCost/100));
+		LCD_vsend_char((char)(totalCost/10));
+		LCD_vsend_char((char)(totalCost%10));
+	}
+	_delay_ms(1000);
+}
