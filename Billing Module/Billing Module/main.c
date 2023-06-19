@@ -11,12 +11,7 @@
 #include "MCAL/SpiDriver/SPI.h"
 #include "HAL/LcdDriver/LCD.h"
 #include "../../ProductsDB/Database.h"
-
-#define START_MESSAGE '5'
-#define END_MESSAGE '3'
-#define ITEMS_COUNT 2
-#define BAR_CODE_LENGTH 1
-#define DUMMY_DATA 0xff
+#include "../../Config.h"
 
 int receiving();
 void calculatingCost(int items);
