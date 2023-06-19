@@ -13,7 +13,10 @@ struct product {
 	char name[20];
 	//char barcode [8];
 	int barcode;
-unsigned int price;	};
+	unsigned int price;
+	unsigned float offer;
+	};
+
 /*
 struct product products[]={{"tea","ABC123456",50},
 {"eggs","CDG55564",100},
@@ -42,10 +45,10 @@ struct product products[]={{"tea","ABC123456",50},
 */
 
 struct product products[]={
-	{"tea",200,50},
-	{"eggs",201,100},
-	{"Apples",202,100},
-	{"Rice",203,25},
+	{"tea",200,50,0.2},
+	{"eggs",201,100,0.2},
+	{"Apples",202,100,0.2},
+	{"Rice",203,25,0.1},
 };
 
 
