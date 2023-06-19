@@ -598,13 +598,13 @@ END GROUP
  .debug_abbrev  0x000007d7       0xdf MCAL/DioDriver/DIO.o
  .debug_abbrev  0x000008b6      0x173 MCAL/SpiDriver/SPI.o
 
-.debug_line     0x00000000      0xdbf
+.debug_line     0x00000000      0xdbe
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x315 HAL/LcdDriver/LCD.o
- .debug_line    0x0000042b      0x338 main.o
- .debug_line    0x00000763      0x449 MCAL/DioDriver/DIO.o
- .debug_line    0x00000bac      0x213 MCAL/SpiDriver/SPI.o
+ .debug_line    0x0000042b      0x337 main.o
+ .debug_line    0x00000762      0x449 MCAL/DioDriver/DIO.o
+ .debug_line    0x00000bab      0x213 MCAL/SpiDriver/SPI.o
 
 .debug_frame    0x00000000      0x250
  *(.debug_frame)
