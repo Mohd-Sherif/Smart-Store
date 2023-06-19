@@ -90,7 +90,7 @@ void calculatingCost(int items){
 			found++;
 		}
 		if(found == BAR_CODE_LENGTH){
-			totalCost += products[i].price;
+			totalCost += products[i].price - (products[i].price * products[i].offer);
 		}
 	}
 }
