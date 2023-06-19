@@ -9,8 +9,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define START_MESSAGE '5'
-#define END_MESSAGE '3'
+#define START_MESSAGE 0
+#define END_MESSAGE 254
 #define ITEMS_COUNT 2
 #define BAR_CODE_LENGTH 1
 #define DUMMY_DATA 0xff
