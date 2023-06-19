@@ -14,7 +14,7 @@ struct product {
 	//char barcode [8];
 	int barcode;
 	unsigned int price;
-	unsigned float offer;
+	float offer;
 	};
 
 /*
