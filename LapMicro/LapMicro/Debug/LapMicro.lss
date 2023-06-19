@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000208  00000000  00000000  00000bf8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001959  00000000  00000000  00000e00  2**0
+  6 .debug_info   000018e0  00000000  00000000  00000e00  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000c91  00000000  00000000  00002759  2**0
+  7 .debug_abbrev 00000c73  00000000  00000000  000026e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001374  00000000  00000000  000033ea  2**0
+  8 .debug_line   00001365  00000000  00000000  00003353  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000454  00000000  00000000  00004760  2**2
+  9 .debug_frame  00000454  00000000  00000000  000046b8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000714  00000000  00000000  00004bb4  2**0
+ 10 .debug_str    00000726  00000000  00000000  00004b0c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000017de  00000000  00000000  000052c8  2**0
+ 11 .debug_loc    000017de  00000000  00000000  00005232  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000198  00000000  00000000  00006aa6  2**0
+ 12 .debug_ranges 00000198  00000000  00000000  00006a10  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1007,12 +1007,6 @@ ISR(INT0_vect){
  76a:	08 95       	ret
 
 0000076c <DIO_vsetpin_dir>:
-
- #include <avr/io.h>
- #include "../StandardMacrosHeader/std_macros.h"
-
-void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char direction){
-	switch(port){
  76c:	90 e0       	ldi	r25, 0x00	; 0
  76e:	fc 01       	movw	r30, r24
  770:	e1 54       	subi	r30, 0x41	; 65
@@ -1024,9 +1018,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  77c:	e2 52       	subi	r30, 0x22	; 34
  77e:	ff 4f       	sbci	r31, 0xFF	; 255
  780:	0c 94 f9 04 	jmp	0x9f2	; 0x9f2 <__tablejump2__>
-		case 'A':
-		case 'a':
-			if(direction==0)CLR_BIT(DDRA,pin); //Set the direction of the given pin in port A as input
  784:	41 11       	cpse	r20, r1
  786:	0c c0       	rjmp	.+24     	; 0x7a0 <DIO_vsetpin_dir+0x34>
  788:	2a b3       	in	r18, 0x1a	; 26
@@ -1041,7 +1032,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  79a:	82 23       	and	r24, r18
  79c:	8a bb       	out	0x1a, r24	; 26
  79e:	08 95       	ret
-			else SET_BIT(DDRA,pin); //Set the direction of the given pin in port A as output
  7a0:	2a b3       	in	r18, 0x1a	; 26
  7a2:	81 e0       	ldi	r24, 0x01	; 1
  7a4:	90 e0       	ldi	r25, 0x00	; 0
@@ -1053,10 +1043,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  7b0:	82 2b       	or	r24, r18
  7b2:	8a bb       	out	0x1a, r24	; 26
  7b4:	08 95       	ret
-			break;
-		case 'B':
-		case 'b':
-			if(direction==0)CLR_BIT(DDRB,pin); //Set the direction of the given pin in port B as input
  7b6:	41 11       	cpse	r20, r1
  7b8:	0c c0       	rjmp	.+24     	; 0x7d2 <DIO_vsetpin_dir+0x66>
  7ba:	27 b3       	in	r18, 0x17	; 23
@@ -1071,7 +1057,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  7cc:	82 23       	and	r24, r18
  7ce:	87 bb       	out	0x17, r24	; 23
  7d0:	08 95       	ret
-			else SET_BIT(DDRB,pin); //Set the direction of the given pin in port B as output
  7d2:	27 b3       	in	r18, 0x17	; 23
  7d4:	81 e0       	ldi	r24, 0x01	; 1
  7d6:	90 e0       	ldi	r25, 0x00	; 0
@@ -1083,10 +1068,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  7e2:	82 2b       	or	r24, r18
  7e4:	87 bb       	out	0x17, r24	; 23
  7e6:	08 95       	ret
-			break;
-		case 'C':
-		case 'c':
-			if(direction==0)CLR_BIT(DDRC,pin); //Set the direction of the given pin in port C as input
  7e8:	41 11       	cpse	r20, r1
  7ea:	0c c0       	rjmp	.+24     	; 0x804 <__DATA_REGION_LENGTH__+0x4>
  7ec:	24 b3       	in	r18, 0x14	; 20
@@ -1101,7 +1082,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  7fe:	82 23       	and	r24, r18
  800:	84 bb       	out	0x14, r24	; 20
  802:	08 95       	ret
-			else SET_BIT(DDRC,pin); //Set the direction of the given pin in port C as output
  804:	24 b3       	in	r18, 0x14	; 20
  806:	81 e0       	ldi	r24, 0x01	; 1
  808:	90 e0       	ldi	r25, 0x00	; 0
@@ -1113,10 +1093,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  814:	82 2b       	or	r24, r18
  816:	84 bb       	out	0x14, r24	; 20
  818:	08 95       	ret
-			break;
-		case 'D':
-		case 'd':
-			if(direction==0)CLR_BIT(DDRD,pin); //Set the direction of the given pin in port D as input
  81a:	41 11       	cpse	r20, r1
  81c:	0c c0       	rjmp	.+24     	; 0x836 <__DATA_REGION_LENGTH__+0x36>
  81e:	21 b3       	in	r18, 0x11	; 17
@@ -1131,7 +1107,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  830:	82 23       	and	r24, r18
  832:	81 bb       	out	0x11, r24	; 17
  834:	08 95       	ret
-			else SET_BIT(DDRD,pin); //Set the direction of the given pin in port D as output
  836:	21 b3       	in	r18, 0x11	; 17
  838:	81 e0       	ldi	r24, 0x01	; 1
  83a:	90 e0       	ldi	r25, 0x00	; 0
@@ -1145,12 +1120,6 @@ void DIO_vsetpin_dir(unsigned char port,unsigned char pin,unsigned char directio
  84a:	08 95       	ret
 
 0000084c <DIO_vwritepin>:
-			break;
-	}
-}
-
-void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
-	switch(port){
  84c:	90 e0       	ldi	r25, 0x00	; 0
  84e:	fc 01       	movw	r30, r24
  850:	e1 54       	subi	r30, 0x41	; 65
@@ -1162,9 +1131,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  85c:	ee 5f       	subi	r30, 0xFE	; 254
  85e:	fe 4f       	sbci	r31, 0xFE	; 254
  860:	0c 94 f9 04 	jmp	0x9f2	; 0x9f2 <__tablejump2__>
-		case 'A':
-		case 'a':
-			if(value==0)CLR_BIT(PORTA,pin); //Set the value of the given pin in port A as Low
  864:	41 11       	cpse	r20, r1
  866:	0c c0       	rjmp	.+24     	; 0x880 <__stack+0x21>
  868:	2b b3       	in	r18, 0x1b	; 27
@@ -1179,7 +1145,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  87a:	82 23       	and	r24, r18
  87c:	8b bb       	out	0x1b, r24	; 27
  87e:	08 95       	ret
-			else SET_BIT(PORTA,pin); //Set the value of the given pin in port A as High
  880:	2b b3       	in	r18, 0x1b	; 27
  882:	81 e0       	ldi	r24, 0x01	; 1
  884:	90 e0       	ldi	r25, 0x00	; 0
@@ -1191,10 +1156,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  890:	82 2b       	or	r24, r18
  892:	8b bb       	out	0x1b, r24	; 27
  894:	08 95       	ret
-			break;
-		case 'B':
-		case 'b':
-			if(value==0)CLR_BIT(PORTB,pin); //Set the value of the given pin in port B as Low
  896:	41 11       	cpse	r20, r1
  898:	0c c0       	rjmp	.+24     	; 0x8b2 <__stack+0x53>
  89a:	28 b3       	in	r18, 0x18	; 24
@@ -1209,7 +1170,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  8ac:	82 23       	and	r24, r18
  8ae:	88 bb       	out	0x18, r24	; 24
  8b0:	08 95       	ret
-			else SET_BIT(PORTB,pin); //Set the value of the given pin in port B as High
  8b2:	28 b3       	in	r18, 0x18	; 24
  8b4:	81 e0       	ldi	r24, 0x01	; 1
  8b6:	90 e0       	ldi	r25, 0x00	; 0
@@ -1221,10 +1181,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  8c2:	82 2b       	or	r24, r18
  8c4:	88 bb       	out	0x18, r24	; 24
  8c6:	08 95       	ret
-			break;
-		case 'C':
-		case 'c':
-			if(value==0)CLR_BIT(PORTC,pin); //Set the value of the given pin in port C as Low
  8c8:	41 11       	cpse	r20, r1
  8ca:	0c c0       	rjmp	.+24     	; 0x8e4 <__stack+0x85>
  8cc:	25 b3       	in	r18, 0x15	; 21
@@ -1239,7 +1195,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  8de:	82 23       	and	r24, r18
  8e0:	85 bb       	out	0x15, r24	; 21
  8e2:	08 95       	ret
-			else SET_BIT(PORTC,pin); //Set the value of the given pin in port C as High
  8e4:	25 b3       	in	r18, 0x15	; 21
  8e6:	81 e0       	ldi	r24, 0x01	; 1
  8e8:	90 e0       	ldi	r25, 0x00	; 0
@@ -1251,10 +1206,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  8f4:	82 2b       	or	r24, r18
  8f6:	85 bb       	out	0x15, r24	; 21
  8f8:	08 95       	ret
-			break;
-		case 'D':
-		case 'd':
-			if(value==0)CLR_BIT(PORTD,pin); //Set the value of the given pin in port D as low
  8fa:	41 11       	cpse	r20, r1
  8fc:	0c c0       	rjmp	.+24     	; 0x916 <__stack+0xb7>
  8fe:	22 b3       	in	r18, 0x12	; 18
@@ -1269,7 +1220,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  910:	82 23       	and	r24, r18
  912:	82 bb       	out	0x12, r24	; 18
  914:	08 95       	ret
-			else SET_BIT(PORTD,pin); //Set the value of the given pin in port D as High
  916:	22 b3       	in	r18, 0x12	; 18
  918:	81 e0       	ldi	r24, 0x01	; 1
  91a:	90 e0       	ldi	r25, 0x00	; 0
@@ -1283,12 +1233,6 @@ void DIO_vwritepin(unsigned char port,unsigned char pin,unsigned char value){
  92a:	08 95       	ret
 
 0000092c <SPI_Master_init>:
-	DIO_vwritepin('B',4,1); //Set SS to High
-}
-
-void SPI_Slave_init(){
-	SET_BIT(SPCR,SPE); //Enable SPI
-	DIO_vsetpin_dir('B',6,1); //Set MISO as output pin for slave
  92c:	41 e0       	ldi	r20, 0x01	; 1
  92e:	64 e0       	ldi	r22, 0x04	; 4
  930:	82 e4       	ldi	r24, 0x42	; 66
@@ -1317,24 +1261,16 @@ void SPI_Slave_init(){
  966:	08 95       	ret
 
 00000968 <SPI_Master_Transmit_char>:
-}
-
-unsigned char SPI_Master_Transmit_char(unsigned char data){
  968:	cf 93       	push	r28
  96a:	c8 2f       	mov	r28, r24
-	DIO_vwritepin('B',4,0); //Clear SS to send data to slave
  96c:	40 e0       	ldi	r20, 0x00	; 0
  96e:	64 e0       	ldi	r22, 0x04	; 4
  970:	82 e4       	ldi	r24, 0x42	; 66
  972:	0e 94 26 04 	call	0x84c	; 0x84c <DIO_vwritepin>
-	SPDR=data; //Put data in SPDR
  976:	cf b9       	out	0x0f, r28	; 15
-	while(READ_BIT(SPSR,SPIF)==0); //Wait until Transmission is finished
  978:	77 9b       	sbis	0x0e, 7	; 14
  97a:	fe cf       	rjmp	.-4      	; 0x978 <SPI_Master_Transmit_char+0x10>
-	return SPDR; //Read SPDR
  97c:	8f b1       	in	r24, 0x0f	; 15
-}
  97e:	cf 91       	pop	r28
  980:	08 95       	ret
 

@@ -1,10 +1,10 @@
-main.d main.o: .././main.c .././registers.h .././Database.h \
+main.d main.o: .././main.c .././registers.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  .././../LapMicro/HAL/Button\ Driver/Button.h \
- .././../LapMicro/HAL/Button\ Driver/../../MCAL/Dio\ Driver/Dio.h \
- c:\users\mohamed\ sherif\desktop\lapmicro\lapmicro\lapmicro\registers.h \
- c:\users\mohamed\ sherif\desktop\lapmicro\lapmicro\lapmicro\std_macros.h \
+ d:\github\smart-store\lapmicro\lapmicro\mcal\dio\ driver\dio.h \
+ d:\github\smart-store\lapmicro\lapmicro\registers.h \
+ d:\github\smart-store\lapmicro\lapmicro\std_macros.h \
  .././../LapMicro/HAL/LCD\ Driver/LCD.h \
  .././../LapMicro/HAL/LCD\ Driver/../../std_macros.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
@@ -26,11 +26,10 @@ main.d main.o: .././main.c .././registers.h .././Database.h \
  .././../LapMicro/MCAL/USART\ Driver/USART.h \
  .././../LapMicro/MCAL/USART\ Driver/../Dio\ Driver/Dio.h \
  .././MCAL/SpiDriver/SPI.h .././MCAL/SpiDriver/DioDriver/DIO.h \
- .././MCAL/SpiDriver/StandardMacrosHeader/std_macros.h
+ .././MCAL/SpiDriver/StandardMacrosHeader/std_macros.h \
+ .././../../Config.h
 
 .././registers.h:
-
-.././Database.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
@@ -38,11 +37,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././../LapMicro/HAL/Button\ Driver/Button.h:
 
-.././../LapMicro/HAL/Button\ Driver/../../MCAL/Dio\ Driver/Dio.h:
+d:\github\smart-store\lapmicro\lapmicro\mcal\dio\ driver\dio.h:
 
-c:\users\mohamed\ sherif\desktop\lapmicro\lapmicro\lapmicro\registers.h:
+d:\github\smart-store\lapmicro\lapmicro\registers.h:
 
-c:\users\mohamed\ sherif\desktop\lapmicro\lapmicro\lapmicro\std_macros.h:
+d:\github\smart-store\lapmicro\lapmicro\std_macros.h:
 
 .././../LapMicro/HAL/LCD\ Driver/LCD.h:
 
@@ -89,3 +88,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././MCAL/SpiDriver/DioDriver/DIO.h:
 
 .././MCAL/SpiDriver/StandardMacrosHeader/std_macros.h:
+
+.././../../Config.h:

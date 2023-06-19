@@ -120,9 +120,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Database.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="HAL\ADC Driver\ADC.c">
       <SubType>compile</SubType>
     </Compile>
