@@ -11,7 +11,7 @@
 
 #define START_MESSAGE 0
 #define END_MESSAGE 254
-#define ITEMS_COUNT 2
+#define ITEMS_COUNT 3
 #define BAR_CODE_LENGTH 1
 #define DUMMY_DATA 0xff
 

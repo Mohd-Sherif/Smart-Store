@@ -24,14 +24,15 @@ volatile char barcode[10][10];
 volatile static int i=0;
 volatile char z=0;
 
-volatile int testArray[2] = {200, 201};
- 
+//volatile int testArray[2] = {200, 201};
+ volatile int item=0;
+ char testArray[ITEMS_COUNT];
 int main(void)
 {
 	sei();
 	LCD_init('c');
 	UART_init(9600);
-	
+	setPinDirection('c',0,OUTPUT);
 	GICR |= (1 << INT0);
 	MCUCR |= (1 << ISC01);
 	
@@ -54,11 +55,12 @@ ISR (USART_UDRE_vect)
 ISR (USART_RXC_vect)
 {
 	x = UDR;
-		barcode[i][z]=x;
-	z++;
-	if (z==BAR_CODE_LENGTH)
+		barcode[i][0]=x;
+	item++;
+	//if (z==BAR_CODE_LENGTH)
 	i++;
 	if (i==ITEMS_COUNT) i=0;
+	changeToOneDigit();
 }
 ISR(INT0_vect){
 	SPI_Master_Transmit_char(START_MESSAGE);
@@ -80,9 +82,27 @@ ISR(INT0_vect){
 	//SPI_Master_Transmit_String("CDG55564d");
 	//testArray[0] = (int)(barcode[0][0]-48)*100 + (int)(barcode[1][1]-48)*10 + (int)(barcode[2][2]-48);
 	//testArray[1] = (int)(barcode[3][3]-48)*100 + (int)(barcode[4][4]-48)*10 + (int)(barcode[5][5]-48);
-	SPI_Master_Transmit_char(testArray[0]);
-	SPI_Master_Transmit_char(testArray[1]);
+	for (int i=0;i<item;i++)
+	{
+		SPI_Master_Transmit_char(testArray[i]);
+	}
+	
+	//SPI_Master_Transmit_char(testArray[1]);
 	SPI_Master_Transmit_char(END_MESSAGE);
+	i=0;
+	item=0;
+	writePin('c',0,HIGH);
+	_delay_ms(1500);
+	writePin('c',0,LOW);
 }
-
+void changeToOneDigit()
+{
+	for(int i=0;i<item;i++)
+	{
+		//testArray[i]=(int)(barcode[i][0]-48)*100 + (int)(barcode[i][1]-48)*10 + (int)(barcode[i][2]-48);
+		testArray[i]= (int)(barcode[i][0]-48);
+		
+	}
+	
+}
 

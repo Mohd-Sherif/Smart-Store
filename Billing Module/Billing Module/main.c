@@ -25,6 +25,7 @@ int main(void)
 {
 	int items;
     LCD_vinit();
+	//DIO_vsetport_dir('d',0xff);
 	LCD_vsend_string(" Welcome To Our ");
 	LCD_vmove_cursor(2,1);
 	LCD_vsend_string("   Smart Store  ");
@@ -63,36 +64,39 @@ int main(void)
 int receiving(){
 	unsigned char received;
 	for(int i=0;i<ITEMS_COUNT;i++){
-		for(int j=0;j<BAR_CODE_LENGTH;j++){
+	//	for(int j=0;j<BAR_CODE_LENGTH;j++){
 			//received = USART_u8receive_data();
 			received = SPI_Slave_Receive_char(DUMMY_DATA);
 			//_delay_ms(300);
 			if(received == END_MESSAGE){
 				return i+1;
 			}
-			receivedProducts[i][j] = received;
-		}
+			receivedProducts[i][0] = received;
+		//}
 	}
 	return ITEMS_COUNT;
 }
 
 void calculatingCost(int items){
-	int found;
+//	int found;
+	int idx;
 	//int *ptr;
 	for(int i=0;i<items;i++){
-		found = 0;
+		//found = 0;
 		//ptr = products[i].barcode;
-		for(int j=0;j<BAR_CODE_LENGTH;j++){
+		for(int j=0;j<4;j++){
 			//if(receivedProducts[i][j] != ptr[j]){
-			if(receivedProducts[i][j] != products[i].barcode){
+			if(receivedProducts[i][0] == products[j].barcode){
+				idx=j;
 				break;
 			}
-			found++;
+			//found++;
 		}
-		if(found == BAR_CODE_LENGTH){
-			totalCost += products[i].price - (products[i].price * products[i].offer);
-		}
+		//if(found == BAR_CODE_LENGTH){
+			totalCost += products[idx].price - (products[idx].price * products[idx].offer);
+	//	}
 	}
+	//DIO_vwriteport('d',totalCost);
 }
 
 void printCost(){
@@ -111,5 +115,5 @@ void printCost(){
 		LCD_vsend_char((char)((totalCost/10)%10)+48);
 		LCD_vsend_char((char)(totalCost%10)+48);
 	}
-	_delay_ms(1000);
+	_delay_ms(1500);
 }

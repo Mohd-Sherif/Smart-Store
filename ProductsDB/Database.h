@@ -45,10 +45,10 @@ struct product products[]={{"tea","ABC123456",50},
 */
 
 struct product products[]={
-	{"tea",200,50,0.2},
-	{"eggs",201,100,0.2},
-	{"Apples",202,100,0.2},
-	{"Rice",203,25,0.1},
+	{"tea",4,50,0.2},
+	{"eggs",1,100,0.2},
+	{"Apples",3,100,0.2},
+	{"Rice",2,25,0.1},
 };
 
 
